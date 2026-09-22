@@ -339,7 +339,12 @@ function AuthDialog({
     });
     setBusy(false);
     if (error) {
-      toast.error("Không đăng nhập được: email hoặc mật khẩu chưa đúng.");
+      const msg = error.message.toLowerCase();
+      toast.error(
+        msg.includes("confirm")
+          ? "Bạn hãy mở email và xác nhận tài khoản trước khi đăng nhập nhé."
+          : "Không đăng nhập được: email hoặc mật khẩu chưa đúng.",
+      );
       return;
     }
     let name = (data.user?.user_metadata?.['full_name'] as string | undefined) ?? null;
@@ -374,10 +379,13 @@ function AuthDialog({
     });
     setBusy(false);
     if (error) {
+      const msg = error.message.toLowerCase();
       toast.error(
-        error.message.toLowerCase().includes("already")
+        msg.includes("already")
           ? "Email này đã có tài khoản. Bạn hãy đăng nhập nhé."
-          : "Không tạo được tài khoản. Bạn thử lại giúp mình nhé.",
+          : msg.includes("weak") || msg.includes("pwned")
+            ? "Mật khẩu này quá dễ đoán. Bạn hãy chọn mật khẩu khác mạnh hơn nhé."
+            : "Không tạo được tài khoản. Bạn thử lại giúp mình nhé.",
       );
       return;
     }
