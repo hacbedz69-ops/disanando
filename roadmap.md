@@ -1,0 +1,3 @@
+- [x] Expand to twelve illustrated achievements and synchronized timeline data
+- [x] Add pagination, filters, logo, social links and timeline detail dialogs
+- [x] Verify interactions and rendering

@@ -1,24 +1,49 @@
+import { categories } from "@/data/content";
 import { createFileRoute } from "@tanstack/react-router";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+import { SiteHeader } from "@/components/site/SiteHeader";
+import { Hero } from "@/components/site/Hero";
+import { Achievements } from "@/components/site/Achievements";
+import { Timeline } from "@/components/site/Timeline";
+import { Testimonials } from "@/components/site/Testimonials";
+import { Social } from "@/components/site/Social";
+import { SiteFooter } from "@/components/site/SiteFooter";
+
+const title = "Di Sản Ấn Độ — Lịch Sử, Văn Hóa & Thành Tựu";
+const description =
+  "Cổng thông tin tiếng Việt về lịch sử, triết học, khoa học và di sản Ấn Độ: từ Indus, Maurya, Gupta đến Mughal và thành tựu hiện đại.";
+
 export const Route = createFileRoute("/")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    q: typeof search['q'] === "string" ? search['q'] : "",
+    category: categories.find(c => c === search['category']) ?? "Tất cả",
+    page: Number(search['page']) === 2 ? 2 : 1,
+  }),
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      <SiteHeader />
+      <main>
+        <Hero />
+        <Achievements />
+        <Timeline />
+        <Testimonials />
+        <Social />
+      </main>
+      <SiteFooter />
     </div>
   );
 }
