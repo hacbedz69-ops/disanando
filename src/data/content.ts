@@ -10,8 +10,19 @@ import chessImg from "@/assets/chess-games.jpg";
 import textilesImg from "@/assets/textiles.jpg";
 import irrigationImg from "@/assets/irrigation.jpg";
 import nalandaImg from "@/assets/nalanda.jpg";
+import geoSoilImg from "@/assets/geo-soil.jpg";
+import geoPeopleImg from "@/assets/geo-people.jpg";
+import geoLocationImg from "@/assets/geo-location.jpg";
+import geoClimateImg from "@/assets/geo-climate.jpg";
+import relOverviewImg from "@/assets/rel-overview.jpg";
+import relBrahmanismImg from "@/assets/rel-brahmanism.jpg";
+import relHinduImg from "@/assets/rel-hindu.jpg";
+import relBuddhismImg from "@/assets/rel-buddhism.jpg";
+import relAbrahamicImg from "@/assets/rel-abrahamic.jpg";
 
 export type Category =
+  | "Địa lý"
+  | "Tôn giáo"
   | "Lịch sử"
   | "Khoa học & Y học"
   | "Văn hóa & Nghệ thuật"
@@ -34,6 +45,8 @@ export type Achievement = {
 
 export const categories = [
   "Tất cả",
+  "Địa lý",
+  "Tôn giáo",
   "Lịch sử",
   "Khoa học & Y học",
   "Văn hóa & Nghệ thuật",
@@ -174,29 +187,55 @@ export const achievements: Achievement[] = [
   },
   {
     id: "triet-hoc",
-    title: "Triết Học, Yoga & Sử Thi",
+    title: "Văn Hóa, Ngôn Ngữ, Triết Học & Sử Thi",
     category: "Văn hóa & Nghệ thuật",
     label: "Văn hóa",
     era: "1500 TCN – nay",
     summary:
-      "Kinh Vệ Đà, triết lý Yoga Sutra cùng hai bộ đại sử thi Mahabharata và Ramayana.",
+      "Tiếng Phạn (Sanskrit) cổ đại, các hệ ngôn ngữ Ấn Độ, kinh Vệ Đà, triết lý Yoga Sutra cùng hai đại sử thi Mahabharata và Ramayana.",
     image: philoImg,
     context: [
+      "Tiếng Phạn (Sanskrit) là một trong những ngôn ngữ văn học cổ nhất còn được ghi chép, thuộc nhánh Ấn – Iran của ngữ hệ Ấn – Âu (Indo-European). Chính việc so sánh Sanskrit với tiếng Hy Lạp và Latin vào thế kỷ 18 đã khai sinh ngành ngôn ngữ học so sánh: phần lớn ngôn ngữ châu Âu và Bắc Ấn được chứng minh có cùng gốc tổ tiên.",
+      "Nhà ngữ pháp Panini (khoảng thế kỷ 5 – 4 TCN) viết 'Ashtadhyayi' gồm gần 4.000 quy tắc – bộ ngữ pháp hình thức đầu tiên của nhân loại, được xem là tiền thân của tư duy mô tả hình thức trong khoa học máy tính. Từ Sanskrit và Prakrit phát triển các ngôn ngữ Bắc Ấn ngày nay: Hindi, Bengali, Marathi, Gujarati, Punjabi.",
+      "Miền Nam Ấn Độ thuộc ngữ hệ Dravidian hoàn toàn riêng biệt với Tamil, Telugu, Kannada, Malayalam – trong đó Tamil có truyền thống văn học liên tục hơn hai nghìn năm. Hệ chữ viết cổ Brahmi là gốc của Devanagari, Tamil, Bengali, Thái, Lào, Khmer và Tây Tạng; Ấn Độ hiện có 22 ngôn ngữ chính thức.",
       "Kinh Vedas (Rig, Yajur, Sama, Atharva) là những văn bản tôn giáo – triết học lâu đời nhất được truyền khẩu chính xác qua hàng nghìn năm. Upanishads đặt ra các câu hỏi nền tảng về Brahman (thực tại tối hậu) và Atman (bản ngã).",
       "Sáu trường phái triết học chính thống (Nyaya, Vaisheshika, Samkhya, Yoga, Mimamsa, Vedanta) cùng Phật giáo và Jain giáo tạo nên một truyền thống tranh luận logic phong phú. 'Yoga Sutra' của Patanjali hệ thống hóa tám nhánh yoga.",
       "Mahabharata (khoảng 100.000 câu thơ đôi, dài nhất thế giới) chứa Bhagavad Gita; Ramayana kể chuyện Rama và Sita, lan tỏa khắp châu Á – trong đó có Việt Nam qua ảnh hưởng Champa.",
     ],
     facts: [
+      { label: "Ngôn ngữ cổ", value: "Sanskrit – nhánh Ấn – Âu, ngôn ngữ kinh điển" },
+      { label: "Ngữ pháp đầu tiên", value: "Ashtadhyayi của Panini – gần 4.000 quy tắc" },
+      { label: "Hai ngữ hệ lớn", value: "Ấn – Arya (Bắc) và Dravidian (Nam)" },
+      { label: "Chữ viết", value: "Brahmi → Devanagari, Tamil, Bengali..." },
       { label: "Mahabharata", value: "~100.000 shloka – sử thi dài nhất thế giới" },
       { label: "Yoga Sutra", value: "8 nhánh yoga của Patanjali" },
       { label: "Ngày Yoga Quốc tế", value: "21/6, do Liên Hợp Quốc công nhận" },
       { label: "Bất bạo động", value: "Ahimsa – cảm hứng cho Gandhi, Martin Luther King" },
     ],
     takeaways: [
+      "Sanskrit là chìa khóa giúp khoa học nhận ra mối họ hàng của các ngôn ngữ Ấn – Âu.",
+      "Ngữ pháp Panini là ví dụ sớm nhất về hệ quy tắc hình thức chặt chẽ.",
       "Yoga và thiền định đã trở thành di sản sức khỏe toàn cầu.",
       "Truyền thống tranh luận Ấn Độ là nền tảng sớm của logic hình thức.",
     ],
-    keywords: ["triết học", "yoga", "vedas", "mahabharata", "ramayana", "văn hóa"],
+    keywords: [
+      "triết học",
+      "yoga",
+      "vedas",
+      "mahabharata",
+      "ramayana",
+      "văn hóa",
+      "ngôn ngữ",
+      "tiếng phạn",
+      "sanskrit",
+      "panini",
+      "dravidian",
+      "chữ viết",
+      "brahmi",
+      "devanagari",
+      "tamil",
+      "hindi",
+    ],
   },
   {
     id: "gia-vi",
