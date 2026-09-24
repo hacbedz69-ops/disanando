@@ -15,7 +15,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { categories, searchIndex } from "@/data/content";
+import { achievements, categories, searchIndex } from "@/data/content";
+import { openItem } from "@/lib/open-item";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/auth";
@@ -97,9 +98,33 @@ export function SiteHeader() {
           `${item.title} ${item.subtitle} ${item.category} ${(item.keywords ?? []).join(" ")}`,
         );
         return haystack.includes(q) || terms.every((term) => haystack.includes(term));
-      })
-      .slice(0, 6);
+      });
   }, [query, cat]);
+
+  const groups = useMemo(
+    () => [
+      { label: "Thẻ Thành Tựu & Di Sản", items: results.filter((r) => !r.id.startsWith("tl-")).slice(0, 6) },
+      { label: "Mốc Dòng Thời Gian Lịch Sử", items: results.filter((r) => r.id.startsWith("tl-")).slice(0, 5) },
+    ],
+    [results],
+  );
+
+  const openResult = (item: (typeof results)[number]) => {
+    setSearchOpen(false);
+    if (item.id.startsWith("tl-")) {
+      openItem({ kind: "timeline", index: Number(item.id.slice(3)) });
+    } else if (achievements.some((a) => a.id === item.id)) {
+      openItem({ kind: "achievement", id: item.id });
+    } else {
+      scrollToId(item.target);
+    }
+  };
+
+  const clearSearch = () => {
+    setQuery("");
+    setCat("Tất cả");
+  };
+
 
 
   return (
@@ -140,7 +165,14 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-2">
           <div ref={searchRef} className="relative">
-            <div className="flex items-center gap-2 rounded-full border border-gold-deep/30 bg-card px-3 py-1.5 shadow-sm">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                const first = results[0];
+                if (first) openResult(first);
+              }}
+              className="flex items-center gap-2 rounded-full border border-gold-deep/30 bg-card px-3 py-1.5 shadow-sm"
+            >
               <Search className="size-4 text-primary" aria-hidden />
               <input
                 value={query}
@@ -153,7 +185,12 @@ export function SiteHeader() {
                 aria-label="Tìm kiếm nội dung"
                 className="w-32 bg-transparent text-sm outline-none placeholder:text-muted-foreground/80 sm:w-56"
               />
-            </div>
+              {query && (
+                <button type="button" onClick={clearSearch} aria-label="Xóa bộ lọc" className="text-muted-foreground hover:text-foreground">
+                  <X className="size-4" />
+                </button>
+              )}
+            </form>
 
             {searchOpen && (
               <div className="heritage-frame absolute right-0 top-12 w-[min(92vw,26rem)] rounded-xl bg-card p-3">
@@ -173,19 +210,21 @@ export function SiteHeader() {
                     </button>
                   ))}
                 </div>
-                <ul className="max-h-80 space-y-1 overflow-y-auto">
+                <div className="max-h-96 space-y-3 overflow-y-auto">
                   {results.length === 0 && (
-                    <li className="px-2 py-6 text-center text-sm text-muted-foreground">
-                      Không tìm thấy nội dung phù hợp.
-                    </li>
+                    <div className="px-2 py-6 text-center text-sm text-muted-foreground">
+                      <p>Không tìm thấy kết quả phù hợp cho từ khóa '{query}'</p>
+                      <Button size="sm" className="mt-3" onClick={clearSearch}>Xóa bộ lọc</Button>
+                    </div>
                   )}
-                  {results.map((item) => (
+                  {groups.filter((g) => g.items.length > 0).map((g) => (
+                    <div key={g.label}>
+                      <p className="px-2 pb-1 text-[11px] font-bold uppercase tracking-wider text-gold-deep">{g.label}</p>
+                      <ul className="space-y-1">
+                  {g.items.map((item) => (
                     <li key={item.id}>
                       <button
-                        onClick={() => {
-                          setSearchOpen(false);
-                          scrollToId(item.target);
-                        }}
+                        onClick={() => openResult(item)}
                         className="flex w-full items-center gap-3 rounded-lg p-2 text-left transition-colors hover:bg-secondary"
                       >
                         <img
@@ -210,7 +249,10 @@ export function SiteHeader() {
                       </button>
                     </li>
                   ))}
-                </ul>
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
