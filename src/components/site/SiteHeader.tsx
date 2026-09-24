@@ -97,8 +97,34 @@ export function SiteHeader() {
           `${item.title} ${item.subtitle} ${item.category} ${(item.keywords ?? []).join(" ")}`,
         );
         return haystack.includes(q) || terms.every((term) => haystack.includes(term));
-      })
-      .slice(0, 6);
+      });
+  }, [query, cat]);
+
+  const groups = useMemo(
+    () => [
+      { label: "Thẻ Thành Tựu & Di Sản", items: results.filter((r) => !r.id.startsWith("tl-")).slice(0, 6) },
+      { label: "Mốc Dòng Thời Gian Lịch Sử", items: results.filter((r) => r.id.startsWith("tl-")).slice(0, 5) },
+    ],
+    [results],
+  );
+
+  const openResult = (item: (typeof results)[number]) => {
+    setSearchOpen(false);
+    if (item.id.startsWith("tl-")) {
+      openItem({ kind: "timeline", index: Number(item.id.slice(3)) });
+    } else if (achievements.some((a) => a.id === item.id)) {
+      openItem({ kind: "achievement", id: item.id });
+    } else {
+      scrollToId(item.target);
+    }
+  };
+
+  const clearSearch = () => {
+    setQuery("");
+    setCat("Tất cả");
+  };
+
+  useMemo(() => {
   }, [query, cat]);
 
 
