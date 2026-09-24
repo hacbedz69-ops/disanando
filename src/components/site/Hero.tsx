@@ -41,7 +41,7 @@ export function Hero() {
           <dl className="mt-10 grid max-w-lg grid-cols-3 gap-4">
             {[
               { k: "5.000+", v: "năm lịch sử" },
-              { k: "6", v: "lĩnh vực thành tựu" },
+              { k: "8", v: "lĩnh vực thành tựu" },
               { k: "7", v: "thời kỳ tiêu biểu" },
             ].map((s) => (
               <div key={s.v} className="heritage-frame rounded-lg bg-card/70 px-3 py-3 text-center">
