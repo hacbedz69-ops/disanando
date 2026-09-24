@@ -8,6 +8,7 @@ import { Timeline } from "@/components/site/Timeline";
 import { Testimonials } from "@/components/site/Testimonials";
 import { Social } from "@/components/site/Social";
 import { SiteFooter } from "@/components/site/SiteFooter";
+import { AiAssistant } from "@/components/site/AiAssistant";
 
 const title = "Di Sản Ấn Độ — Lịch Sử, Văn Hóa & Thành Tựu";
 const description =
@@ -44,6 +45,7 @@ function Index() {
         <Social />
       </main>
       <SiteFooter />
+      <AiAssistant />
     </div>
   );
 }
