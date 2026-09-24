@@ -1,4 +1,5 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { onOpenItem } from "@/lib/open-item";
 import {
   Bookmark,
   BookmarkCheck,
@@ -32,6 +33,28 @@ export function Achievements() {
   const setCat = (category: (typeof categories)[number]) => navigate({ to: ".", search: (prev) => ({ ...prev, category, page: 1 }), resetScroll: false });
   const [selected, setSelected] = useState<Achievement | null>(null);
   const { isSaved, toggle } = useBookmarks();
+  const clearFilters = () =>
+    navigate({ to: ".", search: { q: "", category: "Tất cả", page: 1 }, resetScroll: false });
+
+  useEffect(
+    () =>
+      onOpenItem((d) => {
+        if (d.kind !== "achievement") return;
+        const idx = achievements.findIndex((a) => a.id === d.id);
+        if (idx < 0) return;
+        navigate({
+          to: ".",
+          search: { q: "", category: "Tất cả", page: Math.floor(idx / 6) + 1 },
+          resetScroll: false,
+        });
+        setTimeout(() => {
+          const el = document.getElementById(`the-${d.id}`) ?? document.getElementById("kham-pha");
+          el?.scrollIntoView({ behavior: "smooth", block: "center" });
+          setSelected(achievements[idx] ?? null);
+        }, 150);
+      }),
+    [navigate],
+  );
 
   const toggleBookmark = (a: Achievement) => {
     const nowSaved = toggle(a.id);
@@ -93,16 +116,23 @@ export function Achievements() {
         />
 
         <div className="mx-auto mt-8 flex max-w-4xl flex-col items-stretch gap-3">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-primary" />
-            <Input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Ví dụ: số 0, Ashoka, Ayurveda, Taj Mahal..."
-              aria-label="Tìm kiếm thành tựu"
-              className="border-gold-deep/30 bg-card pl-9"
-            />
-          </div>
+          <form onSubmit={(e) => e.preventDefault()} className="flex gap-2">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-primary" />
+              <Input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Ví dụ: số 0, Ashoka, Ayurveda, Taj Mahal..."
+                aria-label="Tìm kiếm thành tựu"
+                className="border-gold-deep/30 bg-card pl-9"
+              />
+            </div>
+            {(query || cat !== "Tất cả") && (
+              <Button type="button" variant="outline" onClick={clearFilters} className="border-gold-deep/35">
+                Xóa bộ lọc
+              </Button>
+            )}
+          </form>
           <div className="flex flex-wrap gap-2">
             {categories.map((c) => (
               <Button
