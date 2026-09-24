@@ -160,6 +160,7 @@ export function Achievements() {
         <div key={`${cat}-${query}-${currentPage}`} className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 motion-safe:animate-in motion-safe:fade-in motion-safe:duration-300">
           {filtered.slice((currentPage - 1) * 6, currentPage * 6).map((a) => (
             <article
+              id={`the-${a.id}`}
               onClick={() => setSelected(a)}
               key={a.id}
               className="heritage-frame group flex flex-col overflow-hidden rounded-xl bg-card transition-transform duration-300 hover:-translate-y-1"
@@ -202,9 +203,10 @@ export function Achievements() {
         </nav>}
 
         {filtered.length === 0 && (
-          <p className="mt-10 text-center text-muted-foreground">
-            Không có chủ đề nào khớp với tìm kiếm của bạn.
-          </p>
+          <div className="mt-10 text-center text-muted-foreground">
+            <p>Không tìm thấy kết quả phù hợp cho từ khóa '{query}'</p>
+            <Button className="mt-4" onClick={clearFilters}>Xóa bộ lọc</Button>
+          </div>
         )}
       </div>
 

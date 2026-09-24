@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { onOpenItem } from "@/lib/open-item";
 import { Landmark, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -7,6 +8,11 @@ import { SectionTitle } from "./Achievements";
 
 export function Timeline() {
   const [selected, setSelected] = useState<TimelineEvent | null>(null);
+  useEffect(() => onOpenItem((d) => {
+    if (d.kind !== "timeline") return;
+    document.getElementById(`moc-${d.index}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setSelected(timeline[d.index] ?? null);
+  }), []);
   return (
     <section id="dong-thoi-gian" className="scroll-mt-24">
       <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
