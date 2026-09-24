@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ChinhSachBaoMatRouteImport } from './routes/chinh-sach-bao-mat'
 import { Route as DaLuuRouteImport } from './routes/da-luu'
 import { Route as DieuKhoanSuDungRouteImport } from './routes/dieu-khoan-su-dung'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const DieuKhoanSuDungRoute = DieuKhoanSuDungRouteImport.update({
   path: '/dieu-khoan-su-dung',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/chinh-sach-bao-mat': typeof ChinhSachBaoMatRoute
   '/da-luu': typeof DaLuuRoute
   '/dieu-khoan-su-dung': typeof DieuKhoanSuDungRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/chinh-sach-bao-mat': typeof ChinhSachBaoMatRoute
   '/da-luu': typeof DaLuuRoute
   '/dieu-khoan-su-dung': typeof DieuKhoanSuDungRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,14 +61,30 @@ export interface FileRoutesById {
   '/chinh-sach-bao-mat': typeof ChinhSachBaoMatRoute
   '/da-luu': typeof DaLuuRoute
   '/dieu-khoan-su-dung': typeof DieuKhoanSuDungRoute
+  '/api/chat': typeof ApiChatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/chinh-sach-bao-mat' | '/da-luu' | '/dieu-khoan-su-dung'
+  fullPaths:
+    | '/'
+    | '/chinh-sach-bao-mat'
+    | '/da-luu'
+    | '/dieu-khoan-su-dung'
+    | '/api/chat'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/chinh-sach-bao-mat' | '/da-luu' | '/dieu-khoan-su-dung'
+  to:
+    | '/'
+    | '/chinh-sach-bao-mat'
+    | '/da-luu'
+    | '/dieu-khoan-su-dung'
+    | '/api/chat'
   id:
-    '__root__' | '/' | '/chinh-sach-bao-mat' | '/da-luu' | '/dieu-khoan-su-dung'
+    | '__root__'
+    | '/'
+    | '/chinh-sach-bao-mat'
+    | '/da-luu'
+    | '/dieu-khoan-su-dung'
+    | '/api/chat'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -68,6 +92,7 @@ export interface RootRouteChildren {
   ChinhSachBaoMatRoute: typeof ChinhSachBaoMatRoute
   DaLuuRoute: typeof DaLuuRoute
   DieuKhoanSuDungRoute: typeof DieuKhoanSuDungRoute
+  ApiChatRoute: typeof ApiChatRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -100,6 +125,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DieuKhoanSuDungRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -108,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChinhSachBaoMatRoute: ChinhSachBaoMatRoute,
   DaLuuRoute: DaLuuRoute,
   DieuKhoanSuDungRoute: DieuKhoanSuDungRoute,
+  ApiChatRoute: ApiChatRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
