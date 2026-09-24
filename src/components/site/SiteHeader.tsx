@@ -124,8 +124,6 @@ export function SiteHeader() {
     setCat("Tất cả");
   };
 
-  useMemo(() => {
-  }, [query, cat]);
 
 
   return (
