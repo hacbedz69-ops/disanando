@@ -88,7 +88,7 @@ export function Achievements() {
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
         <SectionTitle
           eyebrow="Khám phá Thành tựu"
-          title="12 Trụ Cột Văn Minh & Di Sản Ấn Độ"
+          title="21 Trụ Cột Văn Minh & Di Sản Ấn Độ"
           desc="Hành trình khám phá tri thức toàn diện từ Khoa học, Lịch sử, Kiến trúc đến Ẩm thực, Y học và Trò chơi trí tuệ."
         />
 

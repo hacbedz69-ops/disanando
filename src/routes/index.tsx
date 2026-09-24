@@ -17,7 +17,7 @@ export const Route = createFileRoute("/")({
   validateSearch: (search: Record<string, unknown>) => ({
     q: typeof search['q'] === "string" ? search['q'] : "",
     category: categories.find(c => c === search['category']) ?? "Tất cả",
-    page: Number(search['page']) === 2 ? 2 : 1,
+    page: Math.max(1, Math.floor(Number(search['page'])) || 1),
   }),
   head: () => ({
     meta: [
