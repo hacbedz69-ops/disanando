@@ -183,6 +183,10 @@ export function SiteHeader() {
                   event.preventDefault();
                   searchInputRef.current?.focus({ preventScroll: true });
                 }}
+                onMouseDown={(event) => {
+                  if (document.activeElement === event.currentTarget) return;
+                  event.preventDefault();
+                }}
                 onChange={(e) => {
                   setQuery(e.target.value);
                   setSearchOpen(true);
