@@ -47,7 +47,6 @@ export function SiteHeader() {
   const [welcomeOpen, setWelcomeOpen] = useState(false);
   const [welcomeName, setWelcomeName] = useState<string | null>(null);
   const searchRef = useRef<HTMLDivElement>(null);
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const { user, fullName, signOut } = useAuth();
   const { ids: bookmarkIds } = useBookmarks();
 
@@ -176,17 +175,7 @@ export function SiteHeader() {
             >
               <Search className="size-4 text-primary" aria-hidden />
               <input
-                ref={searchInputRef}
                 value={query}
-                onPointerDown={(event) => {
-                  if (document.activeElement === event.currentTarget) return;
-                  event.preventDefault();
-                  searchInputRef.current?.focus({ preventScroll: true });
-                }}
-                onMouseDown={(event) => {
-                  if (document.activeElement === event.currentTarget) return;
-                  event.preventDefault();
-                }}
                 onChange={(e) => {
                   setQuery(e.target.value);
                   setSearchOpen(true);
