@@ -128,7 +128,8 @@ export function SiteHeader() {
 
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gold-deep/25 bg-parchment/90 backdrop-blur-md">
+    <>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-gold-deep/25 bg-parchment/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <button
           onClick={() => scrollToId("trang-chu")}
@@ -356,6 +357,8 @@ export function SiteHeader() {
       />
       <WelcomeDialog open={welcomeOpen} onOpenChange={setWelcomeOpen} name={welcomeName} />
     </header>
+    <div className="h-16" aria-hidden="true" />
+    </>
   );
 }
 
