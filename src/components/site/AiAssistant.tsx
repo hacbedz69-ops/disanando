@@ -74,11 +74,23 @@ export function AiAssistant() {
                 <div key={m.id} className={cn("flex", m.role === "user" ? "justify-end" : "justify-start")}>
                   <div
                     className={cn(
-                      "max-w-[85%] whitespace-pre-wrap rounded-lg px-3 py-2 text-sm leading-relaxed",
-                      m.role === "user" ? "bg-primary text-primary-foreground" : "bg-parchment-deep/60 text-foreground",
+                      "max-w-[85%] rounded-lg px-3 py-2 text-sm leading-relaxed",
+                      m.role === "user"
+                        ? "whitespace-pre-wrap bg-primary text-primary-foreground"
+                        : "ai-markdown bg-parchment-deep/60 text-foreground",
                     )}
                   >
-                    {text || (thinking ? <span className="italic text-muted-foreground">Đang suy nghĩ…</span> : "")}
+                    {text ? (
+                      m.role === "user" ? (
+                        text
+                      ) : (
+                        <ReactMarkdown>{text}</ReactMarkdown>
+                      )
+                    ) : thinking ? (
+                      <span className="italic text-muted-foreground">Đang suy nghĩ…</span>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </div>
               );
