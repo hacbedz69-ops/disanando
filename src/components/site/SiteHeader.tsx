@@ -128,7 +128,7 @@ export function SiteHeader() {
 
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gold-deep/25 bg-parchment/90 backdrop-blur-md">
+    <header className="sticky top-0 z-50 [overflow-anchor:none] border-b border-gold-deep/25 bg-parchment/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 sm:px-6">
         <button
           onClick={() => scrollToId("trang-chu")}
