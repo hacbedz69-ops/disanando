@@ -1043,7 +1043,7 @@ export const searchIndex: SearchItem[] = [
 export const testimonials = [
   {
     name: "Đỗ Khánh Thi",
-    role: "Giáo viên Ngữ Văn, Trường THPT Chu Văn An",
+    role: "Giáo viên Lịch Sử, Trường THPT Chu Văn An",
     initials: " ĐT",
     rating: 5,
     quote:
