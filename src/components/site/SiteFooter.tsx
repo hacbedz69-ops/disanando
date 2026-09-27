@@ -40,9 +40,7 @@ export function SiteFooter() {
               {quickLinks.map((l) => (
                 <li key={l.id}>
                   <button
-                    onClick={() =>
-                      document.getElementById(l.id)?.scrollIntoView({ behavior: "smooth" })
-                    }
+                    onClick={() => smoothScrollToId(l.id)}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {l.label}
