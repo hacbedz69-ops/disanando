@@ -1,5 +1,6 @@
 import { Facebook, Landmark, Mail, MessageCircle, Phone, Youtube } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { smoothScrollToId } from "@/lib/smooth-scroll";
 
 const socialIcons = [
   { label: "Facebook", href: "https://www.facebook.com/hbaooo1/", Icon: Facebook, external: true },
