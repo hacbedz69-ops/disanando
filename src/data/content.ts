@@ -1042,9 +1042,9 @@ export const searchIndex: SearchItem[] = [
 
 export const testimonials = [
   {
-    name: "Đỗ Châu Anh",
-    role: "Giáo viên Ngữ Văn, Trường trung học Đa Trí Tuệ\n",
-    initials: " ĐA",
+    name: "Đỗ Khánh Thi",
+    role: "Giáo viên Ngữ Văn, Trường THPT Chu Văn An",
+    initials: " ĐT",
     rating: 5,
     quote:
       "Nội dung được biên soạn công phu, mốc thời gian rõ ràng. Tôi dùng phần Dòng thời gian làm tư liệu giảng dạy chuyên đề văn minh phương Đông cho học sinh lớp 10.",
