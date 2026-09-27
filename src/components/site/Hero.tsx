@@ -3,9 +3,7 @@ import { ArrowRight, CalendarClock, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-india.jpg";
 
-function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+import { smoothScrollToId as scrollToId } from "@/lib/smooth-scroll";
 
 export function Hero() {
   return (

@@ -33,9 +33,7 @@ const navLinks = [
   { id: "lien-he", label: "Liên hệ" },
 ];
 
-function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
+import { smoothScrollToId as scrollToId } from "@/lib/smooth-scroll";
 
 export function SiteHeader() {
   const [active, setActive] = useState("trang-chu");
