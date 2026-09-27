@@ -1,5 +1,6 @@
 import { Facebook, Landmark, Mail, MessageCircle, Phone, Youtube } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { smoothScrollToId } from "@/lib/smooth-scroll";
 
 const socialIcons = [
   { label: "Facebook", href: "https://www.facebook.com/hbaooo1/", Icon: Facebook, external: true },
@@ -40,9 +41,7 @@ export function SiteFooter() {
               {quickLinks.map((l) => (
                 <li key={l.id}>
                   <button
-                    onClick={() =>
-                      document.getElementById(l.id)?.scrollIntoView({ behavior: "smooth" })
-                    }
+                    onClick={() => smoothScrollToId(l.id)}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {l.label}

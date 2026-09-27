@@ -24,6 +24,7 @@ import { WelcomeDialog } from "@/components/site/WelcomeDialog";
 import { useBookmarks } from "@/lib/bookmarks";
 import { Link } from "@tanstack/react-router";
 import { BookmarkCheck } from "lucide-react";
+import { smoothScrollToId as scrollToId } from "@/lib/smooth-scroll";
 
 const navLinks = [
   { id: "trang-chu", label: "Trang chủ" },
@@ -32,10 +33,6 @@ const navLinks = [
   { id: "danh-gia", label: "Đánh giá" },
   { id: "lien-he", label: "Liên hệ" },
 ];
-
-function scrollToId(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
 
 export function SiteHeader() {
   const [active, setActive] = useState("trang-chu");
